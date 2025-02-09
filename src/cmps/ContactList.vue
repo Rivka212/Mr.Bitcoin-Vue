@@ -5,6 +5,7 @@
                 <ContactsPreview :contact="contact" />
                 <div class="action">
                 <RouterLink :to="`/contact/${contact._id}`"><button>Details</button></RouterLink>
+                <RouterLink :to="`/contact/edit/${contact._id}`"><button>Edit</button></RouterLink>
                 <button @click="onRemoveContact(contact._id)">x</button>
            </div> </li>
         </ul>
@@ -37,13 +38,14 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 300px;
+    width: 450px;
     list-style: none;
     color: rgb(29, 32, 29);
     /* background-color: rgb(172, 244, 182); */
     background-color: rgb(129, 217, 141);
     padding: 5px;
     margin: 10px;
+    border: 5px solid rgb(159, 241, 181);
 }
 
 .action{
@@ -62,7 +64,7 @@ button {
     background-color: rgb(193, 242, 200);
 }
 .action :first-child {
-    width: 60px;  
+    width: 50px;  
     margin-right: 10px;
 }
 </style>
