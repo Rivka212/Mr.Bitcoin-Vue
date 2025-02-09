@@ -32,11 +32,19 @@ export default {
 
 <template>
     <h2>Contacts</h2>
+    <RouterLink :to="`/contact/edit/`"><button>Add a Contact</button></RouterLink>
     <ContactsList @remove="removeContact" v-if="contacts" :contacts="contacts" />
 </template>
 
 <style scoped>
 h2 {
     padding: 20px;
+}
+
+button{
+    background-color: rgb(98, 185, 120);
+    color: rgb(244, 246, 245);
+    padding: 5px;
+    margin-left: 50px;
 }
 </style>

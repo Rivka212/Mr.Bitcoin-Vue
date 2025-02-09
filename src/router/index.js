@@ -24,7 +24,7 @@ const routerOptions = {
         component: ContactDetails,
       },
       {
-        path: '/contact/edit/:id',
+        path: '/contact/edit/:id?',
         name: 'ContactEdit',
         component: ContactEdit,
       },

@@ -1,9 +1,10 @@
 <template>
     <section class="contact-edit">
     <form v-if="contact" @submit="onSave" class="form-edit">
-        <input v-model="contact.name" type="text">
-        <input v-model="contact.email" type="email">
-        <button>Save</button>
+      <h3>Name:</h3>  <input v-model="contact.name" type="text">
+      <h3>Phone:</h3>  <input v-model="contact.phone" type="text">
+      <h3>Email:</h3><input v-model="contact.email" type="email">
+      <button>Save</button>
     </form>
     </section>
 </template>
@@ -25,7 +26,11 @@ export default {
     },
     async created() {
         const { id: contactId } = this.$route.params
-        this.contact = await contactService.get(contactId)
+        if(contactId){
+                    this.contact = await contactService.get(contactId)
+        }else{
+            this.contact = contactService.getEmptyContact()
+        }
     }
 }
 </script>
