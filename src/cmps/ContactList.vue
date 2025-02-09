@@ -3,8 +3,10 @@
         <ul>
             <li v-for="contact in contacts" :key="contact._id">
                 <ContactsPreview :contact="contact" />
+                <div class="action">
+                <RouterLink :to="`/contact/${contact._id}`"><button>Details</button></RouterLink>
                 <button @click="onRemoveContact(contact._id)">x</button>
-            </li>
+           </div> </li>
         </ul>
     </section>
 </template>
@@ -35,13 +37,19 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 230px;
+    width: 300px;
     list-style: none;
     color: rgb(29, 32, 29);
     /* background-color: rgb(172, 244, 182); */
     background-color: rgb(129, 217, 141);
     padding: 5px;
     margin: 10px;
+}
+
+.action{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 button {
@@ -52,6 +60,9 @@ button {
     border: none;
     box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.4);
     background-color: rgb(193, 242, 200);
-
+}
+.action :first-child {
+    width: 60px;  
+    margin-right: 10px;
 }
 </style>
