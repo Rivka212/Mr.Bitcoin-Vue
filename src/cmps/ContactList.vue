@@ -34,6 +34,11 @@ export default {
 </script>
 
 <style scoped>
+.contact-list{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
 li {
     display: flex;
     justify-content: space-between;
