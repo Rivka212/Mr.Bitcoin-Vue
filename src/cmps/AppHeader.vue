@@ -4,6 +4,7 @@
     <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/contact">Contact</RouterLink>
     </nav>
   </header>
 </template>
@@ -32,7 +33,7 @@ a:hover{
   color: rgb(142, 220, 179);
 }
 .router-link-exact-active{
-  color: rgb(202, 237, 204);
+  color: rgb(193, 241, 195);
 
 }
 </style>
