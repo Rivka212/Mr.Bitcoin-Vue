@@ -2,6 +2,7 @@
 import { contactService } from '@/services/contact.service.js'
 import ContactsList from '@/cmps/ContactList.vue'
 import ContactFilter from '@/cmps/ContactFilter.vue'
+import { showErrorMsg, showSuccessMsg } from '@/services/eventBus.service';
 
 export default {
     data() {
@@ -14,10 +15,12 @@ export default {
         async removeContact(contactId) {
             try {
              await contactService.remove(contactId)
-            const idx = this.contacts.find(contact => contact._id === contactId)
+            const idx = this.contacts.findIndex(contact => contact._id === contactId)
             this.contacts.splice(idx, 1)    
-            } catch (error) {
-                alert('Something went wrong')
+        showSuccessMsg(`Removed contact ${contactId}`)    
+        } catch (error) {
+                // alert('Something went wrong')
+                showErrorMsg(`Couldn't remove contact`)
             } 
         },
        async filterBy(filterBy){
@@ -47,6 +50,7 @@ export default {
 </template>
 
 <style scoped>
+
 .header{
 display: flex;
 justify-content: center;
@@ -55,6 +59,7 @@ background-color: rgb(141, 247, 185);
 margin: 30px;
 padding: 20px;
 }
+
 h2 {
   margin-inline-end: 50px;
 }
