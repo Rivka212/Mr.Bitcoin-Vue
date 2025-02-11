@@ -53,6 +53,8 @@ export default {
   margin: 60px;
   padding: 20px;
   background-color: rgb(144, 224, 162);
+  max-width: 460px;
+  height: 450px;
 }
 h2,h3{
   margin: 5px;
@@ -68,7 +70,7 @@ img{
   padding: 5px;
 }
 .bitcoinlogo{
-  height: 280px;
-  margin:20px;
+  height: 260px;
+  /* margin:20px; */
 }
 </style>

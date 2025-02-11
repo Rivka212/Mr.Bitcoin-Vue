@@ -5,21 +5,13 @@ import ContactFilter from '@/cmps/ContactFilter.vue'
 import { showErrorMsg, showSuccessMsg } from '@/services/eventBus.service';
 
 export default {
-    data() {
-        return {
-            contacts: null,
-        }
-    },
-  
-    methods: {
+
+      methods: {
         async removeContact(contactId) {
             try {
-             await contactService.remove(contactId)
-            const idx = this.contacts.findIndex(contact => contact._id === contactId)
-            this.contacts.splice(idx, 1)    
+             await this.$store.dispatch({type:'removeContact', contactId})
         showSuccessMsg(`Removed contact ${contactId}`)    
         } catch (error) {
-                // alert('Something went wrong')
                 showErrorMsg(`Couldn't remove contact`)
             } 
         },
@@ -27,11 +19,16 @@ export default {
             await this.loadContacts(filterBy)
         },
         async loadContacts(filterBy={}){
-            this.contacts = await contactService.query(filterBy)
+            this.$store.dispatch({type:'loadContacts',filterBy})
+        },
+    },
+    computed:{
+        contacts(){
+            return this.$store.getters.contacts
         },
     },
         async created() {
-        this.loadContacts
+        this.loadContacts()
     },
     components: {
         ContactsList,
