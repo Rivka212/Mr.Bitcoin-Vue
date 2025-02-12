@@ -23,9 +23,11 @@ setTimeout(()=> this.msg=null,2000)
 </script>
 
 <template>
+  <Transition>
     <div v-if="msg" :class="msg.type" class="user-msg">
     <p>{{ msg.txt }}</p>
     </div>
+    </Transition>
 </template>
 
 <style scoped>
@@ -47,5 +49,16 @@ setTimeout(()=> this.msg=null,2000)
 
 .error {
     background-color: rgb(4, 48, 17);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  /* translate: 100%; */
 }
 </style>
