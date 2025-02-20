@@ -4,6 +4,8 @@ export const storageService = {
     post,
     put,
     remove,
+    load,
+    store,
 }
 
 function query(entityType, delay = 500) {
@@ -47,6 +49,28 @@ function remove(entityType, entityId) {
         _save(entityType, entities)
     })
 }
+
+function load(key) {
+        try {
+          const data = localStorage.getItem(key);
+          if (!data) {
+            return null;
+          }
+          return JSON.parse(data); 
+        } catch (error) {
+          console.error('Error loading from storage:', error);
+          return null; 
+        }
+}
+
+function store(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value)); // שומר כ-JSON
+    } catch (error) {
+      console.error('Error saving to storage:', error);
+    }
+  }
+
 
 // Private functions
 
