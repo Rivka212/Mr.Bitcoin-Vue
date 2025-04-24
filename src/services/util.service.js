@@ -33,3 +33,7 @@ export function debounce(func, delay) {
         timeoutId = setTimeout(() => func(...args), delay)
     }
 }
+
+export function saveToSession(key, value) {
+    sessionStorage[key] = JSON.stringify(value)
+}

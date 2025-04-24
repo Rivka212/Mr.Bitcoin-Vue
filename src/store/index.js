@@ -1,9 +1,10 @@
 import { createApp } from 'vue'
 import { createStore } from 'vuex'
 import contact from './modules/contact'
+import user from './modules/user'
 
 const storeOptions = {
-    strict:true,
+    strict: true,
     state() {
         return {
             count: 0
@@ -14,8 +15,9 @@ const storeOptions = {
             state.count++
         },
     },
-    modules:{
-contact,
+    modules: {
+        contact,
+        user,
     }
 }
 
