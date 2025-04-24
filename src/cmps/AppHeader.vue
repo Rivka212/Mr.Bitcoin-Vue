@@ -6,7 +6,7 @@
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/contact">Contact</RouterLink>
       <RouterLink to="/stats">Chart</RouterLink>
-      <section v-if="loggedInUser">
+      <section class="login" v-if="loggedInUser">
 			<h3>Hello {{ capitalizedUserName }}!</h3>
 			<button class="capitalize button" @click="onLogout">Logout</button>
 		</section>
@@ -63,6 +63,23 @@ a{
   margin-inline-start: 10px;
   font-size: 20px;
 
+}
+.login{
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+}
+h3{
+  margin-right: 10px;
+}
+button{
+  border: none;
+  border-radius: 2px;
+  background-color: rgb(199, 242, 219);
+}
+button:hover{
+  background-color: rgb(142, 220, 179);
 }
 
 a:hover{
