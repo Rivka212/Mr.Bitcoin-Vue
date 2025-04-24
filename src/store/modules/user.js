@@ -1,4 +1,6 @@
 import { userService } from "@/services/user.service"
+import { showErrorMsg, showSuccessMsg } from '@/services/eventBus.service'
+import { capitalize } from "@/services/util.service"
 
 export default {
     state() {
@@ -27,8 +29,10 @@ export default {
       try {
         await userService.logout()
         commit('clearLoggedInUser');
+        showSuccessMsg('Logged out successfully 👋')
       } catch (error) {
         console.error('Logout failed', error);
+        showErrorMsg('Something went wrong 😢')
         throw error;
       }
     },
@@ -36,8 +40,10 @@ export default {
       try {
         const newUser = await userService.signup(username); 
         commit('setLoggedInUser', { user: newUser } );
+        showSuccessMsg(`Welcome, ${capitalize(username)}! 🎉`)
       } catch (error) {
         console.error('Signup failed', error);
+        showErrorMsg('Something went wrong 😢')
         throw error;
       }
     },

@@ -37,3 +37,9 @@ export function debounce(func, delay) {
 export function saveToSession(key, value) {
     sessionStorage[key] = JSON.stringify(value)
 }
+
+export function capitalize(str) {
+    if (!str) return ''
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+  

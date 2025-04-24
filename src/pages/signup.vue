@@ -5,6 +5,7 @@ import { userService } from '@/services/user.service';
 import contact from '@/store/modules/contact';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { showErrorMsg } from '@/services/eventBus.service';
 
 export default {
 
@@ -16,15 +17,18 @@ export default {
 
   methods: {
   async onSignup() {
-    // if (this.username) {
-    //         alert("You are already logged in!");
-    //         return;
-    //     }
+    if (this.loggedInUser) {
+            showErrorMsg("You are already logged in!");
+            return;
+        }
+        if (!this.username.trim()) {
+          showErrorMsg('Please enter a valid username!') 
+             return
+  }
     const username = this.username
     
     try {
       await this.$store.dispatch('signup', { username: this.username });
- 
     } catch (error) {
       console.error('Signup failed:', error);
     }
