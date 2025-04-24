@@ -44,7 +44,7 @@ export default {
     loadLoggedInUser({ commit }) {
       try {
         const user = userService.getLoggedInUser()
-        if (user) commit('setLoggedInUser', { user: newUser })
+        if (user) commit('setLoggedInUser', { user })
       } catch (error) {
         console.error('No logged-in user found')
       }

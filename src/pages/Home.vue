@@ -13,7 +13,7 @@ export default {
     methods: {
     async loadUser() {       
         try{
-            this.BTC = (await bitcoinService.getRate(this.loggedInUser.balance)).toFixed(2)
+            this.BTC = (await bitcoinService.getRate(this.loggedInUser.coins)).toFixed(3)
            } catch (error) {
                 console.log('Cannot load BTC')
         }
@@ -25,13 +25,12 @@ computed: {
         }
     },
     user() {
-      return this.loggedInUser; // אם יש משתמש, אז הוא יהיה כאן
+      return this.loggedInUser;
     },
     watch: {
     loggedInUser(newUser) {
-      // אם המשתמש השתנה (התחבר או התנתק), נטען את המידע מחדש
       if (newUser) {
-        this.loadUser(); // טוען את ה-BTC כשיש משתמש
+        this.loadUser(); 
       }
     },
   },
@@ -58,10 +57,10 @@ computed: {
     <img class="bitcoinlogo" src="/src/assets/imgs/bitcoinlogo.png" alt="">
 <h2> {{ loggedInUser.name }}</h2><div>
 <img src="/src/assets/imgs/coins.png" alt="">
-<h3>Coins: ${{ loggedInUser.balance }}</h3></div>
+<h3>Balance: ${{ loggedInUser.coins }}</h3></div>
 <div>
 <img src="/src/assets/imgs/bitcoin.png" alt="">
-<h3 v-if="this.BTC">BTC: ${{ this.BTC }}</h3></div>
+<h3 v-if="this.BTC">BTC: {{ BTC }}</h3></div>
 <section v-if="loggedInUser.transactions && loggedInUser.transactions.length">
  <h3>Transactions:</h3>
 <ul>

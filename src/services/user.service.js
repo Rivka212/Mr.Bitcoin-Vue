@@ -108,7 +108,7 @@ function getLoggedInUser() {
 function _createUser(name) {
     return {
         name,
-        coins: 100,
+        coins: 1000,
         moves: []
     }
 }
