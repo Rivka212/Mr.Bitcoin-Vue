@@ -1,45 +1,71 @@
 <script >
 import { bitcoinService } from "@/services/bitcoin.service";
 import {userService} from "@/services/user.service"
+import Signup from "./signup.vue";
 
 export default {
     data() {
         return {
-            user: null,
+            // user: null,
             BTC:null,
         }
     },
     methods: {
     async loadUser() {       
         try{
-            this.BTC = (await bitcoinService.getRate(this.user.balance)).toFixed(2)
+            this.BTC = (await bitcoinService.getRate(this.loggedInUser.balance)).toFixed(2)
            } catch (error) {
-                console.log('Cannot load BTC');
+                console.log('Cannot load BTC')
         }
     },   
 }, 
+computed: {
+  loggedInUser() {
+            return this.$store.getters.loggedInUser
+        }
+    },
+    user() {
+      return this.loggedInUser; // אם יש משתמש, אז הוא יהיה כאן
+    },
+    watch: {
+    loggedInUser(newUser) {
+      // אם המשתמש השתנה (התחבר או התנתק), נטען את המידע מחדש
+      if (newUser) {
+        this.loadUser(); // טוען את ה-BTC כשיש משתמש
+      }
+    },
+  },
         async created() {
-            this.user = await userService.getUser()
-            if (this.user) {
+        if (this.loggedInUser) {
             this.loadUser();
         }
+    },
+    created() {
+  this.$store.dispatch('loadLoggedInUser')
+},
+
+    components: {
+      Signup,
     },
     }
 </script>
 
 <template>
-  <section v-if="user" class="home-page">
+  <section>
+<Signup v-if="!loggedInUser" />
+  </section>
+  <section v-if="loggedInUser" class="home-page">
     <img class="bitcoinlogo" src="/src/assets/imgs/bitcoinlogo.png" alt="">
-<h2> {{ user.name }}</h2><div>
+<h2> {{ loggedInUser.name }}</h2><div>
 <img src="/src/assets/imgs/coins.png" alt="">
-<h3>Coins: ${{ user.balance }}</h3></div>
+<h3>Coins: ${{ loggedInUser.balance }}</h3></div>
 <div>
 <img src="/src/assets/imgs/bitcoin.png" alt="">
 <h3 v-if="this.BTC">BTC: ${{ this.BTC }}</h3></div>
-<section v-if="user.transactions && user.transactions.length">
+<section v-if="loggedInUser.transactions && loggedInUser.transactions.length">
  <h3>Transactions:</h3>
 <ul>
-  <li v-for="(transaction,index) in user.transactions" :key="index">
+  <li v-for="(transaction,index) in loggedInUser.transactions" :key="index">
     {{ transaction }}
   </li>
 </ul>
