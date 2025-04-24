@@ -76,10 +76,11 @@ h3{
 input, button{
     height: 30px;
     border: none;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); 
+
 }
 button{
-    border: 1px solid rgb(177, 160, 26);
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); 
+    border: 1px solid rgb(242, 220, 58);
     background-color: rgb(250, 217, 70);
 }
 img{
@@ -89,5 +90,6 @@ img{
 }
 .bitcoinlogo{
   height: 260px;
+  margin-left: auto;
 }
 </style>

@@ -64,8 +64,6 @@ async function signup(name) {
 async function logout() {
     try {
         _saveLocalUser(null)
-
-        // _saveLoggedInUser(null)
         console.log("User logged out successfully");
     } catch (error) {
         console.error("Error during logout:", error);

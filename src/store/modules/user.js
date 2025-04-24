@@ -20,9 +20,6 @@ export default {
         loggedInUser(state) {
             return state.loggedInUser;
           },
-        //   isUserLoggedIn(state) {
-        //     return !!state.loggedInUser;
-        // }
     },
     actions: {
     async logout({ commit }) {

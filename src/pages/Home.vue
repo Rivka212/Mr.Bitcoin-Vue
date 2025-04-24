@@ -50,9 +50,7 @@ computed: {
 </script>
 
 <template>
-  <section>
-<Signup v-if="!loggedInUser" />
-  </section>
+  <Signup v-if="!loggedInUser" class="home-page"/>
   <section v-if="loggedInUser" class="home-page">
     <img class="bitcoinlogo" src="/src/assets/imgs/bitcoinlogo.png" alt="">
 <h2> {{ loggedInUser.name }}</h2><div>
@@ -74,13 +72,21 @@ computed: {
 </template>
 
 <style scoped>
+template{
+  position: relative;  
+}
 .home-page{
-  margin: 60px;
   padding: 20px;
   background-color: rgb(144, 224, 162);
+  min-width: 460px;
   max-width: 460px;
   height: 450px;
+  position: absolute;
+  top: 50%;                   
+  left: 50%;                  
+  transform: translate(-50%, -50%);
 }
+
 h2,h3{
   margin: 5px;
   }
@@ -91,11 +97,10 @@ h2,h3{
 
 img{
   height: 40px;
-  margin-left: 10px;
   padding: 5px;
 }
 .bitcoinlogo{
   height: 260px;
-  /* margin:20px; */
+  margin-left: auto;
 }
 </style>
