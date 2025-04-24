@@ -6,12 +6,48 @@
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/contact">Contact</RouterLink>
       <RouterLink to="/stats">Chart</RouterLink>
+      <section v-if="loggedInUser">
+			<h3>Hello {{ capitalizedUserName }}!</h3>
+			<button class="capitalize button" @click="onLogout">Logout</button>
+		</section>
     </nav>
   </header>
 </template>
 
 <script>
-export default {}
+
+export default {
+  
+  data() {
+    return {
+      username: '',
+      // loggedInUser:'',
+    }},
+  methods: {
+    async onLogout() {
+      try {
+        await this.$store.dispatch('logout')
+        console.log('User logged out successfully');
+      } catch (error) {
+        console.error('Error during logout:', error);
+      }
+    }
+    },
+
+computed: {
+  loggedInUser() {    
+            return this.$store.getters.loggedInUser
+        
+    },
+    capitalizedUserName() {
+    if (this.loggedInUser && this.loggedInUser.name) {
+      const name = this.loggedInUser.name;
+      return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    }
+    return '';
+  }
+}
+}
 </script>
 
 <style scoped>
